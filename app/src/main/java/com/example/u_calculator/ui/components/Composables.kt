@@ -1,51 +1,37 @@
 package com.example.u_calculator.ui.components
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.u_calculator.ui.theme.UCalculatorTheme
 
 @Composable
-fun CalcButton(
+fun CalcButtonComposable(
     text: String,
     color: Color,
     textColor: Color,
+    isWide: Boolean,
+    onClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Button(
-        onClick = { /*TODO*/ },
-        modifier = modifier,//.fillMaxSize(),
-//            .size(64.dp)
-//            .aspectRatio(1f)
-//            .fillMaxSize()
-//            .requiredSize(88.dp),
-//            .fillMaxSize(),
-//            .aspectRatio(1f),
-//            .fillMaxSize(),
-//            .aspectRatio(1f),
-//            .requiredSize(64.dp),
+        onClick = {
+            onClick(text)
+        },
+        modifier = modifier
+            .aspectRatio(if (isWide) 2f else 1f),
         shape = CircleShape,
         colors = ButtonDefaults.buttonColors(
             containerColor = color,
@@ -54,10 +40,11 @@ fun CalcButton(
     ) {
         Text(
             text = text,
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Medium,
-            textAlign = TextAlign.Center,
-//            softWrap = false
+            modifier = Modifier
+                .padding(start = if (isWide) 10.dp else 0.dp) // Crutch to align "0" and "1"
+                .fillMaxWidth(),
+            textAlign = if (isWide) TextAlign.Start else TextAlign.Center,
+            style = MaterialTheme.typography.headlineSmall
         )
     }
 }
@@ -66,15 +53,27 @@ fun CalcButton(
 @Composable
 fun CalcButtonPreview() {
     UCalculatorTheme {
-        Column {
-//            CalcButton(
-//                text = "7",
-//                color = Color.LightGray
-//            )
-//            CalcButton(
-//                text = "4",
-//                color = Color.DarkGray
-//            )
+        Row {
+            CalcButtonComposable(
+                text = "AC",
+                color = Color(0xFFa5a5a5),
+                textColor = Color.Black,
+                isWide = false,
+                onClick = {},
+                modifier = Modifier
+                    .padding(8.dp)
+                    .weight(1f)
+            )
+            CalcButtonComposable(
+                text = "+/-",
+                color = Color(0xFFa5a5a5),
+                textColor = Color.Black,
+                isWide = false,
+                onClick = {},
+                modifier = Modifier
+                    .padding(8.dp)
+                    .weight(1f)
+            )
         }
     }
 }
