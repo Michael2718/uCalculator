@@ -33,7 +33,7 @@ class CalculatorViewModel : ViewModel() {
                 ButtonOperation.Subtraction -> number1 - number2
                 ButtonOperation.Multiplication -> number1 * number2
                 ButtonOperation.Division -> number1 / number2
-                ButtonOperation.Percentage -> number1 % number1 // TODO: Percentage takes 1/100 out of operand1
+                ButtonOperation.Percentage -> number1 / 100
                 null -> number1
             }
             state.copy(
