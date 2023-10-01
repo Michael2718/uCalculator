@@ -34,7 +34,7 @@ fun UCalculatorApp(
         verticalArrangement = Arrangement.Bottom
     ) {
         Text(
-            text = if (uiState.operation == null) uiState.operand1 else uiState.operand2,
+            text = if (uiState.operation == null && uiState.operand1 != "0") uiState.operand1 else uiState.operand2,
             modifier = Modifier
                 .padding(end = 20.dp)
                 .align(Alignment.End),

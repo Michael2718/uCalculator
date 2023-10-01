@@ -23,7 +23,7 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    private fun calculate() {
+    private fun calculate() { // TODO: Fix bug with empty string
         _uiState.update { state ->
             val (operand1, operand2, operation) = state
             val number1 = operand1.toDouble()
@@ -34,22 +34,18 @@ class CalculatorViewModel : ViewModel() {
                 ButtonOperation.Multiplication -> number1 * number2
                 ButtonOperation.Division -> number1 / number2
                 ButtonOperation.Percentage -> number1 % number1 // TODO: Percentage takes 1/100 out of operand1
-                null -> ""
+                null -> number1
             }
             state.copy(
-                operand1 = result.toString().take(16)
+                operand1 = result.toString().take(16),
+                operand2 = "",
+                operation = null
             )
         }
     }
 
     private fun clear() {
-        _uiState.update { state ->
-            state.copy(
-                operand1 = "0",
-                operand2 = "0",
-                operation = null
-            )
-        }
+        _uiState.update { HomeUiState() }
     }
 
     private fun appendDecimal() {
@@ -74,6 +70,9 @@ class CalculatorViewModel : ViewModel() {
 
     private fun updateOperation(operation: ButtonOperation) {
         _uiState.update { state ->
+            if (state.operation != null && state.operand2.isNotEmpty()) {
+                calculate()
+            }
             state.copy(
                 operation = operation
             )
