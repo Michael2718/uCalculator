@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -55,15 +56,23 @@ fun UCalculatorApp(
                     for (button in row) {
                         CalcButtonComposable(
                             text = button.value,
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .weight(if (button.isWide) 2f else 1f),
-                            color = button.color,
-                            textColor = button.textColor,
+                            color = when (button.colorType) {
+                                ColorType.Primary -> MaterialTheme.colorScheme.primary
+                                ColorType.Secondary -> MaterialTheme.colorScheme.secondary
+                                ColorType.Tertiary -> MaterialTheme.colorScheme.tertiary
+                            },
+                            textColor = when (button.colorType) {
+                                ColorType.Primary -> MaterialTheme.colorScheme.onPrimary
+                                ColorType.Secondary -> MaterialTheme.colorScheme.onSecondary
+                                ColorType.Tertiary -> MaterialTheme.colorScheme.onTertiary
+                            },
                             isWide = button.isWide,
                             onClick = {
                                 viewModel.onButtonClick(button.type)
-                            }
+                            },
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .weight(if (button.isWide) 2f else 1f)
                         )
                     }
                 }

@@ -1,32 +1,27 @@
 package com.example.u_calculator.ui
 
-import androidx.compose.ui.graphics.Color
-
 object Buttons {
     val value = listOf(
         listOf(
             CalcButton(
                 value = "AC",
                 type = ButtonType.Clear,
-                color = Color(0xFFa5a5a5),
-                textColor = Color.Black
+                colorType = ColorType.Tertiary
             ),
             CalcButton(
                 value = "+/-",
                 type = ButtonType.Operation(ButtonOperation.Sign),
-                color = Color(0xFFa5a5a5),
-                textColor = Color.Black
+                colorType = ColorType.Tertiary
             ),
             CalcButton(
                 value = "%",
                 type = ButtonType.Operation(ButtonOperation.Percentage),
-                color = Color(0xFFa5a5a5),
-                textColor = Color.Black
+                colorType = ColorType.Tertiary
             ),
             CalcButton(
                 value = "/",
                 type = ButtonType.Operation(ButtonOperation.Division),
-                color = Color(0xFFff9f0a),
+                colorType = ColorType.Primary
             )
         ),
         listOf(
@@ -45,7 +40,7 @@ object Buttons {
             CalcButton(
                 value = "*",
                 type = ButtonType.Operation(ButtonOperation.Multiplication),
-                color = Color(0xFFff9f0a),
+                colorType = ColorType.Primary
             )
         ),
         listOf(
@@ -64,7 +59,7 @@ object Buttons {
             CalcButton(
                 value = "-",
                 type = ButtonType.Operation(ButtonOperation.Subtraction),
-                color = Color(0xFFff9f0a),
+                colorType = ColorType.Primary
             )
         ),
         listOf(
@@ -83,7 +78,7 @@ object Buttons {
             CalcButton(
                 value = "+",
                 type = ButtonType.Operation(ButtonOperation.Addition),
-                color = Color(0xFFff9f0a),
+                colorType = ColorType.Primary
             )
         ),
         listOf(
@@ -99,7 +94,7 @@ object Buttons {
             CalcButton(
                 value = "=",
                 type = ButtonType.Calculate,
-                color = Color(0xFFff9f0a),
+                colorType = ColorType.Primary
             )
         )
     )
