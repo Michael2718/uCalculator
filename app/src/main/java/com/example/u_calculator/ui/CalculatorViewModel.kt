@@ -65,7 +65,7 @@ class CalculatorViewModel : ViewModel() {
             }
 
             state.copy(
-                currentInput = numbers.peek().toString(),
+                currentInput = numbers.peek().toString().removeSuffix(".0"),
                 numbers = numbers,
                 operations = operations
             )
