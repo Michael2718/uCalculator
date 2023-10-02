@@ -4,84 +4,124 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import java.util.Stack
 
 class CalculatorViewModel : ViewModel() {
 
-    private val _uiState = MutableStateFlow(
-        HomeUiState()
-    )
+    private val _uiState = MutableStateFlow(CalculatorUiState())
 
-    val uiState: StateFlow<HomeUiState> = _uiState
+    val uiState: StateFlow<CalculatorUiState> = _uiState
 
     fun onButtonClick(buttonType: ButtonType) {
         when (buttonType) {
-            is ButtonType.Calculate -> calculate()
+            is ButtonType.Calculate -> {
+                pushNumber(_uiState.value.currentInput.toDouble())
+                calculate()
+            }
             is ButtonType.Clear -> clear()
             is ButtonType.Decimal -> appendDecimal()
             is ButtonType.Digit -> appendDigit(buttonType.digit)
-            is ButtonType.Operation -> updateOperation(buttonType.operation)
+            is ButtonType.Operation -> {
+                pushNumber(_uiState.value.currentInput.toDouble())
+                pushOperation(buttonType.operation)
+                if (buttonType.operation == ButtonOperation.Percentage) {
+                    calculate()
+                }
+                _uiState.update { state ->
+                    state.copy(
+                        currentInput = "0"
+                    )
+                }
+            }
         }
     }
 
-    private fun calculate() { // TODO: Fix bug with empty string
+    private fun calculate() {
         _uiState.update { state ->
-            val (operand1, operand2, operation) = state
-            val number1 = operand1.toDouble()
-            val number2 = operand2.toDouble()
-            val result = when (operation) {
-                ButtonOperation.Addition -> number1 + number2
-                ButtonOperation.Subtraction -> number1 - number2
-                ButtonOperation.Multiplication -> number1 * number2
-                ButtonOperation.Division -> number1 / number2
-                ButtonOperation.Percentage -> number1 / 100
-                null -> number1
+            val (currentInput, numbers, operations) = state
+
+            while (operations.isNotEmpty()) {
+                val operation = operations.pop()
+                val number1 = numbers.pop()
+                val result = if (operation == ButtonOperation.Percentage) {
+                    number1 * 0.01
+                } else {
+                    val number2 = numbers.pop()
+                    when (operation) {
+                        ButtonOperation.Addition -> number2 + number1
+                        ButtonOperation.Subtraction -> number2 - number1
+                        ButtonOperation.Multiplication -> number2 * number1
+                        ButtonOperation.Division -> number2 / number1
+                        else -> throw IllegalArgumentException("Invalid operator: $operation")
+                    }
+                }
+                numbers.push(result)
             }
+
             state.copy(
-                operand1 = result.toString().take(16),
-                operand2 = "",
-                operation = null
+                currentInput = numbers.peek().toString(),
+                numbers = numbers,
+                operations = operations
             )
         }
     }
 
     private fun clear() {
-        _uiState.update { HomeUiState() }
+        _uiState.update { CalculatorUiState() }
     }
 
-    private fun appendDecimal() {
-        _uiState.update { state ->
-            val (operand1, operand2, operation) = state
-            state.copy(
-                operand1 = if (operation == null && "." !in operand1) "$operand1." else operand1,
-                operand2 = if (operation != null && "." !in operand2) "$operand2." else operand2
-            )
-        }
+    private fun appendDecimal() { // TODO: Implement appending decimal point
+//        _uiState.update { state ->
+//            val (operand1, operand2, operation) = state
+//            state.copy(
+//                operand1 = if (operation == null && "." !in operand1) "$operand1." else operand1,
+//                operand2 = if (operation != null && "." !in operand2) "$operand2." else operand2
+//            )
+//        }
     }
 
     private fun appendDigit(digit: String) {
         _uiState.update { state ->
-            val (operand1, operand2, operation) = state
+//            val (currentInput, numbers, operations) = state
             state.copy(
-                operand1 = if (operation == null) if (operand1 == "0") digit else operand1 + digit else operand1,
-                operand2 = if (operation != null) if (operand2 == "0") digit else operand2 + digit else operand2
+                currentInput = if (state.currentInput == "0") digit else state.currentInput + digit,
             )
         }
     }
 
-    private fun updateOperation(operation: ButtonOperation) {
+    private fun pushNumber(number: Double) {
         _uiState.update { state ->
-            if (state.operation != null && state.operand2.isNotEmpty()) {
-                calculate()
-            }
+            val stack = state.numbers
+            stack.push(number)
             state.copy(
-                operation = operation
+                numbers = stack
             )
+        }
+    }
+
+    private fun pushOperation(operation: ButtonOperation) {
+        _uiState.update { state ->
+            if (state.currentInput.isNotEmpty()) {
+                val stack = state.operations
+                stack.push(operation)
+                state.copy(
+                    operations = stack,
+                    currentInput = ""
+                )
+            } else {
+                val stack = state.operations
+                stack.pop()
+                stack.push(operation)
+                state.copy(
+                    operations = stack
+                )
+            }
         }
     }
 }
 
-data class HomeUiState(
-    val operand1: String = "0",
-    val operand2: String = "0",
-    val operation: ButtonOperation? = null
+data class CalculatorUiState(
+    val currentInput: String = "0",
+    val numbers: Stack<Double> = Stack(),
+    val operations: Stack<ButtonOperation> = Stack()
 )
