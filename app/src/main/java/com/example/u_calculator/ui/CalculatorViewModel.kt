@@ -18,20 +18,18 @@ class CalculatorViewModel : ViewModel() {
                 pushNumber(_uiState.value.currentInput.toDouble())
                 calculate()
             }
+
             is ButtonType.Clear -> clear()
             is ButtonType.Decimal -> appendDecimal()
             is ButtonType.Digit -> appendDigit(buttonType.digit)
             is ButtonType.Operation -> {
                 pushNumber(_uiState.value.currentInput.toDouble())
                 pushOperation(buttonType.operation)
-                if (buttonType.operation == ButtonOperation.Percentage) {
+                if (buttonType.operation == ButtonOperation.Percentage ||
+                    buttonType.operation == ButtonOperation.Sign
+                ) {
                     calculate()
                 }
-//                _uiState.update { state ->
-//                    state.copy(
-//                        currentInput = "0"
-//                    )
-//                }
             }
         }
     }
@@ -43,16 +41,24 @@ class CalculatorViewModel : ViewModel() {
             while (operations.isNotEmpty()) {
                 val operation = operations.pop()
                 val number1 = numbers.pop()
-                val result = if (operation == ButtonOperation.Percentage) {
-                    number1 * 0.01
-                } else {
-                    val number2 = numbers.pop()
-                    when (operation) {
-                        ButtonOperation.Addition -> number2 + number1
-                        ButtonOperation.Subtraction -> number2 - number1
-                        ButtonOperation.Multiplication -> number2 * number1
-                        ButtonOperation.Division -> number2 / number1
-                        else -> throw IllegalArgumentException("Invalid operator: $operation")
+                val result = when (operation) {
+                    ButtonOperation.Percentage -> {
+                        number1 * 0.01
+                    }
+
+                    ButtonOperation.Sign -> {
+                        -1 * number1
+                    }
+
+                    else -> {
+                        val number2 = numbers.pop()
+                        when (operation) {
+                            ButtonOperation.Addition -> number2 + number1
+                            ButtonOperation.Subtraction -> number2 - number1
+                            ButtonOperation.Multiplication -> number2 * number1
+                            ButtonOperation.Division -> number2 / number1
+                            else -> throw IllegalArgumentException("Invalid operator: $operation")
+                        }
                     }
                 }
                 numbers.push(result)
@@ -70,21 +76,19 @@ class CalculatorViewModel : ViewModel() {
         _uiState.update { CalculatorUiState() }
     }
 
-    private fun appendDecimal() { // TODO: Implement appending decimal point
-//        _uiState.update { state ->
-//            val (operand1, operand2, operation) = state
-//            state.copy(
-//                operand1 = if (operation == null && "." !in operand1) "$operand1." else operand1,
-//                operand2 = if (operation != null && "." !in operand2) "$operand2." else operand2
-//            )
-//        }
+    private fun appendDecimal() {
+        _uiState.update { state ->
+            val (currentInput, _, _) = state
+            state.copy(
+                currentInput = if ("." in currentInput) currentInput else "$currentInput."
+            )
+        }
     }
 
     private fun appendDigit(digit: String) {
         _uiState.update { state ->
             state.copy(
                 currentInput = if (state.currentInput == "0") digit else state.currentInput + digit,
-                // currentInput = if (state.currentInput == "0" || state.currentInput.toDouble() == state.numbers.peek()) digit else state.currentInput + digit,
             )
         }
     }

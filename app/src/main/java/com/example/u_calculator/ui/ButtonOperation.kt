@@ -6,4 +6,5 @@ sealed class ButtonOperation(val value: String) {
     object Multiplication: ButtonOperation("*")
     object Division: ButtonOperation("/")
     object Percentage: ButtonOperation("%")
+    object Sign: ButtonOperation("+/-")
 }

@@ -13,7 +13,7 @@ object Buttons {
             ),
             CalcButton(
                 value = "+/-",
-                type = ButtonType.Clear, // TODO: Change sign
+                type = ButtonType.Operation(ButtonOperation.Sign),
                 color = Color(0xFFa5a5a5),
                 textColor = Color.Black
             ),
