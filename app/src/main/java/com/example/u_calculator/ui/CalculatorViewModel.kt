@@ -27,18 +27,18 @@ class CalculatorViewModel : ViewModel() {
                 if (buttonType.operation == ButtonOperation.Percentage) {
                     calculate()
                 }
-                _uiState.update { state ->
-                    state.copy(
-                        currentInput = "0"
-                    )
-                }
+//                _uiState.update { state ->
+//                    state.copy(
+//                        currentInput = "0"
+//                    )
+//                }
             }
         }
     }
 
     private fun calculate() {
         _uiState.update { state ->
-            val (currentInput, numbers, operations) = state
+            val (_, numbers, operations) = state
 
             while (operations.isNotEmpty()) {
                 val operation = operations.pop()
@@ -82,9 +82,9 @@ class CalculatorViewModel : ViewModel() {
 
     private fun appendDigit(digit: String) {
         _uiState.update { state ->
-//            val (currentInput, numbers, operations) = state
             state.copy(
                 currentInput = if (state.currentInput == "0") digit else state.currentInput + digit,
+                // currentInput = if (state.currentInput == "0" || state.currentInput.toDouble() == state.numbers.peek()) digit else state.currentInput + digit,
             )
         }
     }
@@ -101,21 +101,13 @@ class CalculatorViewModel : ViewModel() {
 
     private fun pushOperation(operation: ButtonOperation) {
         _uiState.update { state ->
-            if (state.currentInput.isNotEmpty()) {
-                val stack = state.operations
-                stack.push(operation)
-                state.copy(
-                    operations = stack,
-                    currentInput = ""
-                )
-            } else {
-                val stack = state.operations
-                stack.pop()
-                stack.push(operation)
-                state.copy(
-                    operations = stack
-                )
-            }
+            val stack = state.operations
+            if (state.currentInput == "0") stack.pop()
+            stack.push(operation)
+            state.copy(
+                operations = stack,
+                currentInput = "0"
+            )
         }
     }
 }
