@@ -3,19 +3,24 @@ package com.example.u_calculator.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.u_calculator.ui.components.AutoSizeText
 import com.example.u_calculator.ui.components.CalcButtonComposable
 import com.example.u_calculator.ui.theme.UCalculatorTheme
 
@@ -30,18 +35,24 @@ fun UCalculatorApp(
 
     Column(
         modifier = modifier
-            .padding(bottom = 40.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+            .padding(bottom = 40.dp) // TODO: Padding for tablet: .padding(start = 120.dp, end = 120.dp, bottom = 40.dp)
+            .fillMaxHeight(),
+        horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.Bottom
     ) {
-        Text(
-            text = uiState.currentInput,
+        Row(
             modifier = Modifier
-                .padding(end = 20.dp)
-                .align(Alignment.End),
-            color = Color.White,
-            fontSize = 100.sp
-        )
+                .height(140.dp)
+                .padding(horizontal = 20.dp)
+        ) {
+            AutoSizeText(
+                text = uiState.currentInput,
+                color = MaterialTheme.colorScheme.onBackground,
+                style = MaterialTheme.typography.displaySmall,
+                modifier = Modifier
+                    .align(Alignment.Bottom)
+            )
+        }
         Column(
             modifier = Modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -96,10 +107,15 @@ fun UCalculatorApp(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun UCalculatorAppPreview() {
     UCalculatorTheme {
-        UCalculatorApp()
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = Color.Black
+        ) { // MaterialTheme.colorScheme.background
+            UCalculatorApp()
+        }
     }
 }
