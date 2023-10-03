@@ -19,7 +19,7 @@ object Buttons {
                 colorType = ColorType.Tertiary
             ),
             CalcButton(
-                value = "/",
+                value = "÷",
                 type = ButtonType.Operation(ButtonOperation.Division),
                 colorType = ColorType.Primary
             )
@@ -38,7 +38,7 @@ object Buttons {
                 type = ButtonType.Digit("9"),
             ),
             CalcButton(
-                value = "*",
+                value = "×",
                 type = ButtonType.Operation(ButtonOperation.Multiplication),
                 colorType = ColorType.Primary
             )
@@ -57,7 +57,7 @@ object Buttons {
                 type = ButtonType.Digit("6"),
             ),
             CalcButton(
-                value = "-",
+                value = "–",
                 type = ButtonType.Operation(ButtonOperation.Subtraction),
                 colorType = ColorType.Primary
             )

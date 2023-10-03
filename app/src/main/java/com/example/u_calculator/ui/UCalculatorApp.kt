@@ -56,7 +56,7 @@ fun UCalculatorApp(
                     for (button in row) {
                         CalcButtonComposable(
                             text = button.value,
-                            color = when (button.colorType) {
+                            backgroundColor = when (button.colorType) {
                                 ColorType.Primary -> MaterialTheme.colorScheme.primary
                                 ColorType.Secondary -> MaterialTheme.colorScheme.secondary
                                 ColorType.Tertiary -> MaterialTheme.colorScheme.tertiary
@@ -65,6 +65,21 @@ fun UCalculatorApp(
                                 ColorType.Primary -> MaterialTheme.colorScheme.onPrimary
                                 ColorType.Secondary -> MaterialTheme.colorScheme.onSecondary
                                 ColorType.Tertiary -> MaterialTheme.colorScheme.onTertiary
+                            },
+                            fontSize = when (button.type) {
+                                ButtonType.Clear -> 36.sp
+                                is ButtonType.Operation -> if (button.colorType == ColorType.Tertiary) {
+                                    32.sp
+                                } else {
+                                    48.sp
+                                }
+
+                                else -> 40.sp
+                            },
+                            fontWeight = when (button.type) {
+                                ButtonType.Clear -> FontWeight.Medium
+                                is ButtonType.Operation -> FontWeight.Medium
+                                else -> FontWeight.Normal
                             },
                             isWide = button.isWide,
                             onClick = {
