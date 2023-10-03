@@ -9,3 +9,4 @@ val onSecondary = Color.White
 val tertiary = Color(0xFFa5a5a5)
 val onTertiary = Color.Black
 val background = Color.Black
+val onBackground = Color.White
