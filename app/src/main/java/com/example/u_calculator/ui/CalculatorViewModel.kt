@@ -67,7 +67,8 @@ class CalculatorViewModel : ViewModel() {
             }
 
             state.copy(
-                currentInput = numbers.peek().toString().removeSuffix(".0"),
+                currentInput = String.format("%.${MAX_DECIMALS}f", numbers.peek())
+                    .removeSuffix(".0"),
                 numbers = numbers,
                 operations = operations
             )
@@ -115,6 +116,10 @@ class CalculatorViewModel : ViewModel() {
                 currentInput = "0"
             )
         }
+    }
+
+    companion object {
+        private const val MAX_DECIMALS = 6
     }
 }
 
