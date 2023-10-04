@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.u_calculator.data.Buttons
 import com.example.u_calculator.ui.screens.HomeScreen
 import com.example.u_calculator.ui.theme.UCalculatorTheme
 

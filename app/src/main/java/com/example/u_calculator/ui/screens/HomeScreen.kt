@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.u_calculator.ui.ButtonType
-import com.example.u_calculator.ui.CalcButton
+import com.example.u_calculator.data.ButtonType
+import com.example.u_calculator.data.CalcButton
 import com.example.u_calculator.ui.CalculatorUiState
-import com.example.u_calculator.ui.ColorType
+import com.example.u_calculator.data.ColorType
 import com.example.u_calculator.ui.components.AutoSizeText
 import com.example.u_calculator.ui.components.CalcButtonComposable
 

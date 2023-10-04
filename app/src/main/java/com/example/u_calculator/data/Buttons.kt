@@ -1,4 +1,4 @@
-package com.example.u_calculator.ui
+package com.example.u_calculator.data
 
 object Buttons {
     val value = listOf(

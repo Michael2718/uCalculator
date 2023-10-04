@@ -1,6 +1,8 @@
 package com.example.u_calculator.ui
 
 import androidx.lifecycle.ViewModel
+import com.example.u_calculator.data.ButtonOperation
+import com.example.u_calculator.data.ButtonType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

@@ -1,4 +1,4 @@
-package com.example.u_calculator.ui
+package com.example.u_calculator.data
 
 sealed class ButtonOperation(val value: String) {
     object Addition: ButtonOperation("+")
