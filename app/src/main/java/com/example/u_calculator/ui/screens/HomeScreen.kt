@@ -59,7 +59,15 @@ fun HomeScreen(
                 ) {
                     for (button in row) {
                         CalcButtonComposable(
-                            text = button.value,
+                            text = when (button.type) {
+                                ButtonType.Clear -> if (uiState.isCleared) {
+                                    button.value
+                                } else {
+                                    button.valueOnClicked
+                                }
+
+                                else -> button.value
+                            },
                             backgroundColor = when (button.colorType) {
                                 ColorType.Primary -> MaterialTheme.colorScheme.primary
                                 ColorType.Secondary -> MaterialTheme.colorScheme.secondary

@@ -5,6 +5,7 @@ object Buttons {
         listOf(
             CalcButton(
                 value = "AC",
+                valueOnClicked = "C",
                 type = ButtonType.Clear,
                 colorType = ColorType.Tertiary
             ),

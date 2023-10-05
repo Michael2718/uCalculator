@@ -15,6 +15,12 @@ class CalculatorViewModel : ViewModel() {
     val uiState: StateFlow<CalculatorUiState> = _uiState
 
     fun onButtonClick(buttonType: ButtonType) {
+        _uiState.update { state ->
+            state.copy(
+                isCleared = false
+            )
+        }
+
         when (buttonType) {
             is ButtonType.Calculate -> {
                 pushNumber(_uiState.value.currentInput.toDouble())
@@ -110,8 +116,9 @@ class CalculatorViewModel : ViewModel() {
     private fun pushOperation(operation: ButtonOperation) {
         _uiState.update { state ->
             val stack = state.operations
-            if (state.currentInput == "0") stack.pop()
-            stack.push(operation)
+            if (state.currentInput != "0") {
+                stack.push(operation)
+            }
             state.copy(
                 operations = stack,
                 currentInput = "0"
@@ -127,5 +134,6 @@ class CalculatorViewModel : ViewModel() {
 data class CalculatorUiState(
     val currentInput: String = "0",
     val numbers: Stack<Double> = Stack(),
-    val operations: Stack<ButtonOperation> = Stack()
+    val operations: Stack<ButtonOperation> = Stack(),
+    val isCleared: Boolean = true
 )
