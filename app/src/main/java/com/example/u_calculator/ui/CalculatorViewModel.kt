@@ -116,9 +116,7 @@ class CalculatorViewModel : ViewModel() {
     private fun pushOperation(operation: ButtonOperation) {
         _uiState.update { state ->
             val stack = state.operations
-            if (state.currentInput != "0") {
-                stack.push(operation)
-            }
+            stack.push(operation)
             state.copy(
                 operations = stack,
                 currentInput = "0"
