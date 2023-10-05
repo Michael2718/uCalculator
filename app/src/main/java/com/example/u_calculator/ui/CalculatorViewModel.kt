@@ -68,7 +68,8 @@ class CalculatorViewModel : ViewModel() {
 
             state.copy(
                 currentInput = String.format("%.${MAX_DECIMALS}f", numbers.peek())
-                    .removeSuffix(".0"),
+                    .trimEnd('0')
+                    .removeSuffix("."),
                 numbers = numbers,
                 operations = operations
             )
