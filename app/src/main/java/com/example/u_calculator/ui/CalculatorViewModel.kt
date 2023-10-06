@@ -92,7 +92,6 @@ class CalculatorViewModel : ViewModel() {
                 currentInput = "0",
                 expression = when (operation) {
                     ButtonOperation.Sign -> "-" + state.expression
-                    ButtonOperation.Percentage -> state.expression + "/100"
                     else -> state.expression + operation.value
                 }
             )
