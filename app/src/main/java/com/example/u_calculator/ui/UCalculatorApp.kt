@@ -62,8 +62,6 @@ fun UCalculatorApp(
             )
         }
     }
-
-
 }
 
 @Preview(showBackground = true)

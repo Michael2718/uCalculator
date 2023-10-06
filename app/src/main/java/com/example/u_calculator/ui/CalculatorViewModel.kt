@@ -6,7 +6,7 @@ import com.example.u_calculator.data.ButtonType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import java.util.Stack
+import org.mariuszgromada.math.mxparser.Expression
 
 class CalculatorViewModel : ViewModel() {
 
@@ -44,40 +44,15 @@ class CalculatorViewModel : ViewModel() {
 
     private fun calculate() {
         _uiState.update { state ->
-            val (_, numbers, operations) = state
+            val (_, exp, _) = state
 
-            while (operations.isNotEmpty()) {
-                val operation = operations.pop()
-                val number1 = numbers.pop()
-                val result = when (operation) {
-                    ButtonOperation.Percentage -> {
-                        number1 * 0.01
-                    }
-
-                    ButtonOperation.Sign -> {
-                        -1 * number1
-                    }
-
-                    else -> {
-                        val number2 = numbers.pop()
-                        when (operation) {
-                            ButtonOperation.Addition -> number2 + number1
-                            ButtonOperation.Subtraction -> number2 - number1
-                            ButtonOperation.Multiplication -> number2 * number1
-                            ButtonOperation.Division -> number2 / number1
-                            else -> throw IllegalArgumentException("Invalid operator: $operation")
-                        }
-                    }
-                }
-                numbers.push(result)
-            }
+            val result = Expression(exp).calculate()
 
             state.copy(
-                currentInput = String.format("%.${MAX_DECIMALS}f", numbers.peek())
+                currentInput = String.format("%.${MAX_DECIMALS}f", result)
                     .trimEnd('0')
                     .removeSuffix("."),
-                numbers = numbers,
-                operations = operations
+                expression = ""
             )
         }
     }
@@ -105,21 +80,21 @@ class CalculatorViewModel : ViewModel() {
 
     private fun pushNumber(number: Double) {
         _uiState.update { state ->
-            val stack = state.numbers
-            stack.push(number)
             state.copy(
-                numbers = stack
+                expression = state.expression + number.toString()
             )
         }
     }
 
     private fun pushOperation(operation: ButtonOperation) {
         _uiState.update { state ->
-            val stack = state.operations
-            stack.push(operation)
             state.copy(
-                operations = stack,
-                currentInput = "0"
+                currentInput = "0",
+                expression = when (operation) {
+                    ButtonOperation.Sign -> "-" + state.expression
+                    ButtonOperation.Percentage -> state.expression + "/100"
+                    else -> state.expression + operation.value
+                }
             )
         }
     }
@@ -131,7 +106,6 @@ class CalculatorViewModel : ViewModel() {
 
 data class CalculatorUiState(
     val currentInput: String = "0",
-    val numbers: Stack<Double> = Stack(),
-    val operations: Stack<ButtonOperation> = Stack(),
+    val expression: String = "",
     val isCleared: Boolean = true
 )

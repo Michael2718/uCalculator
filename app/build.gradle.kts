@@ -72,4 +72,7 @@ dependencies {
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Math parser
+    implementation("org.mariuszgromada.math:MathParser.org-mXparser:5.2.1")
 }
