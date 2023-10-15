@@ -1,22 +1,27 @@
 # uCalculator
 
-## 📜 Description
+## Project Overview
+
 uCalculator is a simple clone of iOS calculator app, built with
 [Jetpack Compose](https://developer.android.com/jetpack/compose). The goal of building this app is to learn UI tricks by trying to copy layout of the existing app.
 
-To try out this sample app, use the latest stable version
+### 💻 Getting Started
+To try out this app, use the latest stable version
 of [Android Studio](https://developer.android.com/studio).
 You can clone this repository or import the project.
 
-## 📸 Screenshots
+### 🔑 Key Components
+- `Jetpack Compose` The modern UI toolkit for building native UIs.
+- `Clean Architecture` In that case, **MVVM** pattern: Modular, maintainable app design with a clear separation between UI (**Composables**) and business logic (**ViewModel**).
+- `Material3` Material 3 is the latest version of Google’s open-source design system.
+- `Coroutines` Kotlin's Coroutines for managing asynchronous tasks and flow of data.
+- `Custom Composables` Custom comunity **Composables** such as [AutoSizeText](https://gist.github.com/inidamleader/b594d35362ebcf3cedf81055df519300)
+- `mXparser` Math Expression Evaluator / Parser Library 
 
-<div style="display: flex;">
-    <img src="screenshots/0.png" alt="Screenshot0" width=30%>
-    <img src="screenshots/1.png" alt="Screenshot1" width=30%>
-    <img src="screenshots/2.png" alt="Screenshot1" width=30%>
-</div>
+### 📸 Screenshots
+<img src="screenshots/screenshots.png" alt="Screenshots">
 
-## ⭐ Features
+### ⭐ Features
 
 * `User-Friendly Interface:` uCalculator boasts an easy-to-navigate user interface, mimicking the clean and minimalistic design of the iOS calculator. Users can perform calculations effortlessly and efficiently.
 * `Basic Arithmetic Operations:` The app allows users to perform fundamental arithmetic operations such as addition, subtraction, multiplication, and division. This functionality is akin to the core features of the iOS calculator.
