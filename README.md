@@ -6,11 +6,12 @@ To try out this sample app, use the latest stable version
 of [Android Studio](https://developer.android.com/studio).
 You can clone this repository or import the project.
 
-## Screenshots
+## :camera_flash: Screenshots
 
-<div style="display: flex;background-color: white">
+<div style="display: flex; justify-content: space-between">
     <img src="screenshots/0.png" alt="Screenshot0" width=30%>
     <img src="screenshots/1.png" alt="Screenshot1" width=30%>
+    <img src="screenshots/2.png" alt="Screenshot1" width=30%>
 </div>
 
 ## Features
