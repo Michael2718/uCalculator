@@ -1,4 +1,6 @@
 # uCalculator
+
+## 📜 Description
 uCalculator is a simple clone of iOS calculator app, built with
 [Jetpack Compose](https://developer.android.com/jetpack/compose). The goal of building this app is to learn UI tricks by trying to copy layout of the existing app.
 
@@ -6,7 +8,7 @@ To try out this sample app, use the latest stable version
 of [Android Studio](https://developer.android.com/studio).
 You can clone this repository or import the project.
 
-## :camera_flash: Screenshots
+## 📸 Screenshots
 
 <div style="display: flex; justify-content: space-between">
     <img src="screenshots/0.png" alt="Screenshot0" width=30%>
@@ -14,7 +16,7 @@ You can clone this repository or import the project.
     <img src="screenshots/2.png" alt="Screenshot1" width=30%>
 </div>
 
-## Features
+## ⭐ Features
 
 * `User-Friendly Interface:` uCalculator boasts an easy-to-navigate user interface, mimicking the clean and minimalistic design of the iOS calculator. Users can perform calculations effortlessly and efficiently.
 * `Basic Arithmetic Operations:` The app allows users to perform fundamental arithmetic operations such as addition, subtraction, multiplication, and division. This functionality is akin to the core features of the iOS calculator.
