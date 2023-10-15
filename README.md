@@ -8,7 +8,10 @@ You can clone this repository or import the project.
 
 ## Screenshots
 
-<img src="screenshots/?.png" alt="TODO: Screenshots">
+<div style="display: flex;background-color: white">
+    <img src="screenshots/0.png" alt="Screenshot0" width=30%>
+    <img src="screenshots/1.png" alt="Screenshot1" width=30%>
+</div>
 
 ## Features
 
