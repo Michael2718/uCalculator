@@ -58,7 +58,7 @@ fun UCalculatorApp(
                     viewModel.onButtonClick(buttonType)
                 },
                 modifier = modifier
-                    .padding(start = 260.dp, end = 260.dp, bottom = 40.dp)
+                    .padding(start = 172.dp, end = 172.dp, bottom = 40.dp)
             )
         }
     }
