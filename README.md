@@ -1,14 +1,4 @@
 # uCalculator
-## Key Components
-<img src="app\src\main\res\mipmap-xxxhdpi\ic_launcher.webp" alt="Screenshots" width=110 align=left hspace="10" vspace="10">
-
-- `Jetpack Compose` The modern UI toolkit for building native UIs.
-- `Clean Architecture` In that case, **MVVM** pattern: Modular, maintainable app design with a clear separation between UI (**Composables**) and business logic (**ViewModel**).
-- `Material3` Material 3 is the latest version of Google’s open-source design system.
-- `Coroutines` Kotlin's Coroutines for managing asynchronous tasks and flow of data.
-- `Custom Composables` Custom comunity **Composables** such as [AutoSizeText](https://gist.github.com/inidamleader/b594d35362ebcf3cedf81055df519300)
-- `mXparser` Math Expression Evaluator / Parser Library 
-
 
 ## Project Overview
 
@@ -19,6 +9,17 @@ uCalculator is a simple clone of iOS calculator app, built with
 To try out this app, use the latest stable version
 of [Android Studio](https://developer.android.com/studio).
 You can clone this repository or import the project.
+
+### 🔑 Key Components
+
+<img src="app\src\main\res\mipmap-xxxhdpi\ic_launcher.webp" alt="App Icon" width=200 align=left>
+
+- `Jetpack Compose` The modern UI toolkit for building native UIs.
+- `Clean Architecture` In that case, **MVVM** pattern: Modular, maintainable app design with a clear separation between UI (**Composables**) and business logic (**ViewModel**).
+- `Material3` Material 3 is the latest version of Google’s open-source design system.
+- `Coroutines` Kotlin's Coroutines for managing asynchronous tasks and flow of data.
+- `Custom Composables` Custom comunity **Composables** such as [AutoSizeText](https://gist.github.com/inidamleader/b594d35362ebcf3cedf81055df519300)
+- `mXparser` Math Expression Evaluator / Parser Library 
 
 ### 📸 Screenshots
 <img src="screenshots/screenshots.png" alt="Screenshots">
