@@ -12,8 +12,8 @@ You can clone this repository or import the project.
 
 ## Features
 
-* **User-Friendly Interface:** uCalculator boasts an easy-to-navigate user interface, mimicking the clean and minimalistic design of the iOS calculator. Users can perform calculations effortlessly and efficiently.
-* **Basic Arithmetic Operations:** The app allows users to perform fundamental arithmetic operations such as addition, subtraction, multiplication, and division. This functionality is akin to the core features of the iOS calculator.
+* `User-Friendly Interface:` uCalculator boasts an easy-to-navigate user interface, mimicking the clean and minimalistic design of the iOS calculator. Users can perform calculations effortlessly and efficiently.
+* `Basic Arithmetic Operations:` The app allows users to perform fundamental arithmetic operations such as addition, subtraction, multiplication, and division. This functionality is akin to the core features of the iOS calculator.
 
 ## License
 
