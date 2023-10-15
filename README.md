@@ -10,7 +10,7 @@ You can clone this repository or import the project.
 
 ## 📸 Screenshots
 
-<div style="display: flex; justify-content: space-between">
+<div style="display: flex;">
     <img src="screenshots/0.png" alt="Screenshot0" width=30%>
     <img src="screenshots/1.png" alt="Screenshot1" width=30%>
     <img src="screenshots/2.png" alt="Screenshot1" width=30%>
